@@ -12,9 +12,12 @@ function Reminders({ month }) {
     const fetchReminders = async () => {
       if (role === "student" && token) {
         try {
-          const res = await axios.get(`${process.env.API}/api/auth/me`, {
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          const res = await axios.get(
+            `${import.meta.env.VITE_API_URL}/api/auth/me`,
+            {
+              headers: { Authorization: `Bearer ${token}` },
+            },
+          );
           setReminders(
             res.data.reminders.filter((reminder) =>
               moment(reminder.date).isSame(month, "month"),

@@ -9,7 +9,10 @@ export const fetchTasks = createAsyncThunk(
     const config = {
       headers: { Authorization: `Bearer ${auth.token}` },
     };
-    const response = await axios.get(`${process.env.API}/api/tasks`, config);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/tasks`,
+      config,
+    );
     return response.data;
   },
 );
@@ -22,7 +25,10 @@ export const deleteTask = createAsyncThunk(
     const config = {
       headers: { Authorization: `Bearer ${auth.token}` },
     };
-    await axios.delete(`${process.env.API}/tasks/${taskId}`, config);
+    await axios.delete(
+      `${import.meta.env.VITE_API_URL}/tasks/${taskId}`,
+      config,
+    );
     return taskId; // return the id to remove it from state
   },
 );
@@ -35,7 +41,10 @@ export const refreshTasks = createAsyncThunk(
     const config = {
       headers: { Authorization: `Bearer ${auth.token}` },
     };
-    const response = await axios.get(`${process.env.API}/api/tasks`, config);
+    const response = await axios.get(
+      `${import.meta.env.VITE_API_URL}/api/tasks`,
+      config,
+    );
     return response.data;
   },
 );

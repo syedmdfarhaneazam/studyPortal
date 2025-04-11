@@ -10,9 +10,12 @@ function TeacherList() {
   useEffect(() => {
     const fetchTeachers = async () => {
       try {
-        const res = await axios.get(`${process.env.API}/api/auth/teachers`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/auth/teachers`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
         setTeachers(res.data);
       } catch (error) {
         console.error("Error fetching teachers:", error);

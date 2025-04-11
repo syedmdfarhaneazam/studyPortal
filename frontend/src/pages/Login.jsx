@@ -19,7 +19,7 @@ function Login() {
     dispatch(loginStart());
     try {
       const res = await axios.post(
-        `${process.env.API}/api/auth/login`,
+        `${import.meta.env.VITE_API_URL}/api/auth/login`,
         formData,
       );
       dispatch(

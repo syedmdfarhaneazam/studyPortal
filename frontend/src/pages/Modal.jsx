@@ -29,7 +29,7 @@ function Modal({ role, date, onClose }) {
         };
         console.log("Sending task data:", taskData); // debig line
         const response = await axios.post(
-          `${process.env.API}/api/tasks`,
+          `${import.meta.env.VITE_API_URL}/api/tasks`,
           taskData,
           {
             headers: { Authorization: `Bearer ${token}` },
@@ -44,7 +44,7 @@ function Modal({ role, date, onClose }) {
         };
         console.log("Sending reminder data:", reminderData); // debug line
         const response = await axios.post(
-          `${process.env.API}/api/auth/reminder`,
+          `${import.meta.env.VITE_API_URL}/api/auth/reminder`,
           reminderData,
           {
             headers: { Authorization: `Bearer ${token}` },

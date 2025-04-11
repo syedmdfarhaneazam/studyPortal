@@ -10,9 +10,12 @@ function StudentList() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get(`${process.env.API}/api/auth/students`, {
-          headers: { Authorization: `Bearer ${token}` },
-        });
+        const res = await axios.get(
+          `${import.meta.env.VITE_API_URL}/api/auth/students`,
+          {
+            headers: { Authorization: `Bearer ${token}` },
+          },
+        );
         setStudents(res.data);
       } catch (error) {
         console.error("Error fetching students:", error);

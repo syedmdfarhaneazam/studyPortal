@@ -47,7 +47,7 @@ function Profile() {
       };
 
       const res = await axios.put(
-        `${process.env.API}/api/auth/profile`,
+        `${import.meta.env.VITE_API_URL}/api/auth/profile`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } },
       );
