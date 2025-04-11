@@ -9,7 +9,10 @@ export const fetchTasks = createAsyncThunk(
     const config = {
       headers: { Authorization: `Bearer ${auth.token}` },
     };
-    const response = await axios.get("http://localhost:5000/api/tasks", config);
+    const response = await axios.get(
+      "https://studyportal-w3w5.onrender.com/api/tasks",
+      config,
+    );
     return response.data;
   },
 );
@@ -22,7 +25,10 @@ export const deleteTask = createAsyncThunk(
     const config = {
       headers: { Authorization: `Bearer ${auth.token}` },
     };
-    await axios.delete(`http://localhost:5000/api/tasks/${taskId}`, config);
+    await axios.delete(
+      `https://studyportal-w3w5.onrender.com/api/tasks/${taskId}`,
+      config,
+    );
     return taskId; // return the id to remove it from state
   },
 );
@@ -35,7 +41,10 @@ export const refreshTasks = createAsyncThunk(
     const config = {
       headers: { Authorization: `Bearer ${auth.token}` },
     };
-    const response = await axios.get("http://localhost:5000/api/tasks", config);
+    const response = await axios.get(
+      "https://studyportal-w3w5.onrender.com/api/tasks",
+      config,
+    );
     return response.data;
   },
 );

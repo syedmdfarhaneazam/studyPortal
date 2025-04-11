@@ -25,7 +25,7 @@ function Signup() {
     dispatch(signupStart());
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/signup",
+        "https://studyportal-w3w5.onrender.com/api/auth/signup",
         formData,
       );
       dispatch(

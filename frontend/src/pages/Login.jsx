@@ -19,7 +19,7 @@ function Login() {
     dispatch(loginStart());
     try {
       const res = await axios.post(
-        "http://localhost:5000/api/auth/login",
+        "https://studyportal-w3w5.onrender.com/api/auth/login",
         formData,
       );
       dispatch(
