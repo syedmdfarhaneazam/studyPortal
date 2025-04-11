@@ -9,29 +9,34 @@ dotenv.config();
 connectDB();
 
 const app = express();
+
 const allowedOrigins = [
   "http://localhost:5173",
-  "study-portal-owioe519m-syed-md-farhan-e-azams-projects.vercel.app",
-  "study-portal-tan.vercel.app",
+  "https://study-portal-owioe519m-syed-md-farhan-e-azams-projects.vercel.app",
+  "https://study-portal-tan.vercel.app",
 ];
+
 app.use(
   cors({
     origin: (origin, callback) => {
-      if (!origin) return callback(null, true);
-      if (allowedOrigins.includes(origin)) {
+      console.log("CORS Origin:", origin); // debug log
+      if (!origin || allowedOrigins.includes(origin)) {
         return callback(null, true);
       }
-      return callback(new Error("Not allowed by CORS"));
+      console.error("CORS Rejected Origin:", origin); // debug log
+      return callback(null, false);
     },
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
     credentials: true,
   }),
 );
+
 app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
-// edge cases
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong!" });
