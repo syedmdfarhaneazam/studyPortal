@@ -10,7 +10,7 @@ function StudentList() {
   useEffect(() => {
     const fetchStudents = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/auth/students", {
+        const res = await axios.get(`${process.env.API}/api/auth/students`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setStudents(res.data);

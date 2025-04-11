@@ -47,7 +47,7 @@ function Profile() {
       };
 
       const res = await axios.put(
-        "http://localhost:5000/api/auth/profile",
+        `${process.env.API}/api/auth/profile`,
         updatedData,
         { headers: { Authorization: `Bearer ${token}` } },
       );

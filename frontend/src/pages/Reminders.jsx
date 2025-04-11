@@ -12,7 +12,7 @@ function Reminders({ month }) {
     const fetchReminders = async () => {
       if (role === "student" && token) {
         try {
-          const res = await axios.get("http://localhost:5000/api/auth/me", {
+          const res = await axios.get(`${process.env.API}/api/auth/me`, {
             headers: { Authorization: `Bearer ${token}` },
           });
           setReminders(

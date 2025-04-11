@@ -7,12 +7,9 @@ export const fetchUser = createAsyncThunk(
   async (_, { getState }) => {
     const { token } = getState().auth;
     if (!token) throw new Error("No token found");
-    const response = await axios.get(
-      "https://studyportal-w3w5.onrender.com/api/auth/me",
-      {
-        headers: { Authorization: `Bearer ${token}` },
-      },
-    );
+    const response = await axios.get(`${process.env.API}/api/auth/me`, {
+      headers: { Authorization: `Bearer ${token}` },
+    });
     return response.data;
   },
 );

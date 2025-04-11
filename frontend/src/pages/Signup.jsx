@@ -25,7 +25,7 @@ function Signup() {
     dispatch(signupStart());
     try {
       const res = await axios.post(
-        "https://studyportal-w3w5.onrender.com/api/auth/signup",
+        `${process.env.API}/api/auth/signup`,
         formData,
       );
       dispatch(
