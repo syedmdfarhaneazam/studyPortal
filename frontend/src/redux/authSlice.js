@@ -1,7 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-// thunk to fetch user data
 export const fetchUser = createAsyncThunk(
   "auth/fetchUser",
   async (_, { getState }) => {
@@ -14,6 +13,33 @@ export const fetchUser = createAsyncThunk(
       },
     );
     return response.data;
+  },
+);
+
+export const deleteReminder = createAsyncThunk(
+  "auth/deleteReminder",
+  async (reminderId, { getState, rejectWithValue }) => {
+    const { token } = getState().auth;
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}/api/auth/reminder/${reminderId}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        },
+      );
+      return { reminderId, message: response.data.message };
+    } catch (error) {
+      return rejectWithValue(
+        error.response?.data?.message || "Failed to delete reminder",
+      );
+    }
+  },
+);
+
+export const refreshReminders = createAsyncThunk(
+  "auth/refreshReminders",
+  async (_, { dispatch }) => {
+    return await dispatch(fetchUser()).unwrap();
   },
 );
 
@@ -85,6 +111,34 @@ const authSlice = createSlice({
         state.error = action.error.message;
         state.isAuthenticated = false;
         localStorage.removeItem("token");
+      })
+      .addCase(deleteReminder.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteReminder.fulfilled, (state, action) => {
+        state.loading = false;
+        if (state.user && state.user.reminders) {
+          state.user.reminders = state.user.reminders.filter(
+            (reminder) => reminder._id !== action.payload.reminderId,
+          );
+        }
+      })
+      .addCase(deleteReminder.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(refreshReminders.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(refreshReminders.fulfilled, (state, action) => {
+        state.loading = false;
+        state.user = action.payload;
+      })
+      .addCase(refreshReminders.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.error.message;
       });
   },
 });
