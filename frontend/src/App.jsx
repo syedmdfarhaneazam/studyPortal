@@ -1,15 +1,15 @@
 import { createBrowserRouter, Outlet, Navigate } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "./pages/Home";
-import Signup from "./pages/Signup";
-import Login from "./pages/Login";
-import Dashboard from "./pages/Dashboard";
+import Navbar from "./components/Navbar.jsx";
+import Home from "./pages/Home.jsx";
+import Signup from "./pages/Signup.jsx";
+import Login from "./pages/Login.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
 
-import Reminders from "./pages/Reminders";
-import Profile from "./pages/Profile";
-import CalendarPage from "./pages/CalendarPage";
-import TeacherList from "./pages/TeacherList";
-import StudentList from "./pages/StudentList";
+import Reminders from "./pages/Reminders.jsx";
+import Profile from "./pages/Profile.jsx";
+import CalendarPage from "./pages/CalendarPage.jsx";
+import TeacherList from "./pages/TeacherList.jsx";
+import StudentList from "./pages/StudentList.jsx";
 import { useSelector } from "react-redux";
 
 // Protected Route component

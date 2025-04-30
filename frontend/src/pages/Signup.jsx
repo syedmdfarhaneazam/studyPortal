@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { signupStart, signupSuccess, signupFailure } from "../redux/authSlice";
 
-function Signup() {
+export default function Signup() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -121,11 +121,6 @@ function Signup() {
         </button>
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
-      <p>
-        Already have an account? <a href="/login">Login</a>
-      </p>
     </div>
   );
 }
-
-export default Signup;

@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import axios from "axios";
 import { loginStart, loginSuccess, loginFailure } from "../redux/authSlice";
+import Signup from "./Signup.jsx";
 
 function Login() {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -69,9 +70,7 @@ function Login() {
       </form>
       {error && <p style={{ color: "red" }}>{error}</p>}
       {role && <p>Welcome back, {role}!</p>}
-      <p>
-        Don’t have an account? <a href="/signup">Sign Up</a>
-      </p>
+      <Signup />
     </div>
   );
 }
