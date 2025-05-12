@@ -4,12 +4,12 @@ import Home from "./pages/Home.jsx";
 import Signup from "./pages/Signup.jsx";
 import Login from "./pages/Login.jsx";
 import Dashboard from "./pages/Dashboard.jsx";
-
 import Reminders from "./pages/Reminders.jsx";
 import Profile from "./pages/Profile.jsx";
 import CalendarPage from "./pages/CalendarPage.jsx";
 import TeacherList from "./pages/TeacherList.jsx";
 import StudentList from "./pages/StudentList.jsx";
+import ChatPage from "./pages/ChatPage.jsx"; // ✅ NEW IMPORT
 import { useSelector } from "react-redux";
 
 // Protected Route component
@@ -41,7 +41,6 @@ const router = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-
       {
         path: "/reminders",
         element: (
@@ -79,6 +78,14 @@ const router = createBrowserRouter([
         element: (
           <ProtectedRoute>
             <StudentList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "/chat/:roomId",
+        element: (
+          <ProtectedRoute>
+            <ChatPage />
           </ProtectedRoute>
         ),
       },

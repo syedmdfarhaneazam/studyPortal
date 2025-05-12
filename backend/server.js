@@ -3,7 +3,10 @@ const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
+const chatRoutes = require("./routes/chatRoutes");
 const cors = require("cors");
+const http = require("http");
+const setupSocketIO = require("./socket/socketManager");
 
 dotenv.config();
 connectDB();
@@ -36,13 +39,19 @@ app.use(express.json());
 
 app.use("/api/auth", authRoutes);
 app.use("/api/tasks", taskRoutes);
+app.use("/api/chat", chatRoutes);
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).json({ message: "Something went wrong!" });
 });
 
+const server = http.createServer(app);
+
+// Setup Socket.IO
+setupSocketIO(server);
+
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });

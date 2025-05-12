@@ -1,11 +1,15 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function TeacherList() {
-  const { token } = useSelector((state) => state.auth);
+  const { token, user } = useSelector((state) => state.auth);
   const [teachers, setTeachers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchTeachers = async () => {
@@ -26,6 +30,12 @@ function TeacherList() {
     fetchTeachers();
   }, [token]);
 
+  const handleTeacherClick = (teacherId) => {
+    const ids = [user._id, teacherId].sort();
+    const roomId = `${ids[0]}_${ids[1]}`;
+    navigate(`/chat/${roomId}`);
+  };
+
   if (loading) {
     return (
       <div className="list-container">
@@ -40,7 +50,12 @@ function TeacherList() {
       {teachers.length > 0 ? (
         <ol className="user-list">
           {teachers.map((teacher) => (
-            <li key={teacher._id} className="user-card">
+            <li
+              key={teacher._id}
+              className="user-card"
+              onClick={() => handleTeacherClick(teacher._id)}
+              style={{ cursor: "pointer" }}
+            >
               <h4>{teacher.name}</h4>
               <p>
                 <strong>Email:</strong> {teacher.email}
