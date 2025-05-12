@@ -21,7 +21,7 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <NavNavLink to="/">Smart Reminder</NavNavLink>
+        <NavLink to="/">Smart Reminder</NavLink>
       </div>
       <ul className="navbar-links">
         {isAuthenticated ? (
